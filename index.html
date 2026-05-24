@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <title>✨ untuk Kiya • permintaan Maaf</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #ffb7c5 0%, #ff9eb0 100%);
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, #ffb7c5, #ff8ba7);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+      transition: all 0.2s linear;
+      /* tidak ada fade, langsung hilang (display none) */
+    }
+
+    .splash-content {
+      text-align: center;
+      animation: bounceGentle 0.9s cubic-bezier(0.34, 1.2, 0.64, 1) forwards;
+    }
+
+    .splash-content h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      letter-spacing: -0.5px;
+      background: rgba(255, 245, 245, 0.2);
+      backdrop-filter: blur(4px);
+      padding: 18px 28px;
+      border-radius: 80px;
+      display: inline-block;
+      box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+
+    @keyframes bounceGentle {
+      0% {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      40% {
+        transform: scale(1.08);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .main-container {
+      display: none;
+      width: 100%;
+      max-width: 550px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .card {
+      background: rgba(255, 250, 240, 0.96);
+      backdrop-filter: blur(0px);
+      border-radius: 48px;
+      padding: 28px 24px 40px;
+      box-shadow: 0 30px 45px -20px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.5);
+      transition: all 0.2s;
+    }
+
+    .chat-bubble {
+      background: #ffe2e8;
+      padding: 18px 20px;
+      border-radius: 32px;
+      border-bottom-left-radius: 8px;
+      margin-bottom: 28px;
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.03);
+      transition: transform 0.2s;
+    }
+
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      background: #ff8aa5;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #a1324b;
+      letter-spacing: -0.3px;
+    }
+
+    .message {
+      font-size: 1rem;
+      line-height: 1.45;
+      color: #2d1c22;
+      margin-top: 5px;
+      padding-left: 8px;
+      border-left: 3px solid #ff98b2;
+    }
+
+    .message p {
+      margin-bottom: 12px;
+    }
+
+    .message .emoji-big {
+      font-size: 1.2rem;
+    }
+
+    .button-zone {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 25px;
+      position: relative;
+      min-height: 85px;
+    }
+
+    .btn {
+      border: none;
+      font-weight: 700;
+      font-size: 1.3rem;
+      padding: 14px 32px;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: -0.2px;
+      backdrop-filter: blur(2px);
+    }
+
+    .btn-maafin {
+      background: #ff6f91;
+      color: white;
+      border: none;
+      box-shadow: 0 12px 20px -8px #ff6f9180;
+    }
+
+    .btn-maafin:active {
+      transform: scale(0.96);
+    }
+
+    .btn-tidak {
+      background: #e0cfd3;
+      color: #5e3a44;
+      transition: transform 0.2s cubic-bezier(0.2, 1.4, 0.5, 1);
+      position: relative;
+      will-change: transform;
+    }
+
+    .btn-tidak:active {
+      transform: scale(0.95);
+    }
+
+    .slide-left {
+      transform: translateX(-60px);
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.2, 0.95, 0.4, 1.05), opacity 0.45s ease;
+    }
+
+    .slide-right {
+      transform: translateX(60px);
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.2, 0.95, 0.4, 1.05), opacity 0.45s ease;
+    }
+
+    .main-container.animate-in .slide-left,
+    .main-container.animate-in .slide-right {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
+    .main-container.animate-in .chat-bubble {
+      transition-delay: 0.05s;
+    }
+    .main-container.animate-in .button-zone {
+      transition-delay: 0.15s;
+    }
+
+    .heart-decoration {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 1.8rem;
+      letter-spacing: 6px;
+      opacity: 0.7;
+    }
+
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(5px);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0.2s, opacity 0.2s;
+    }
+
+    .popup-overlay.active {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .popup-card {
+      background: #fff5f7;
+      max-width: 280px;
+      width: 80%;
+      padding: 32px 20px 40px;
+      border-radius: 64px;
+      text-align: center;
+      box-shadow: 0 40px 50px rgba(0, 0, 0, 0.3);
+      transform: scale(0.9);
+      transition: transform 0.25s cubic-bezier(0.34, 1.2, 0.64, 1);
+      border: 1px solid rgba(255, 128, 128, 0.5);
+    }
+
+    .popup-overlay.active .popup-card {
+      transform: scale(1);
+    }
+
+    .popup-card h2 {
+      font-size: 2rem;
+      color: #ff4d6d;
+      margin-bottom: 12px;
+    }
+
+    .popup-card p {
+      font-size: 1.2rem;
+      color: #3a2a30;
+      font-weight: 500;
+    }
+
+    .confetti {
+      font-size: 2rem;
+      margin: 12px 0;
+    }
+
+    @media (max-width: 550px) {
+      .btn {
+        padding: 12px 24px;
+        font-size: 1.15rem;
+      }
+      .card {
+        padding: 24px 18px 36px;
+      }
+      .splash-content h1 {
+        font-size: 1.8rem;
+        padding: 14px 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="splash" id="splashScreen">
+  <div class="splash-content">
+    <h1>🌸 maaf yaa kiyaa kalo gua ada salah 🌸</h1>
+  </div>
+</div>
+
+<!-- MAIN CONTAINER: halaman utama dengan animasi slide kanan/kiri -->
+<div class="main-container" id="mainContainer">
+  <div class="card">
+    <!-- Chat bubble dari gua (pesan permintaan maaf) slide from left -->
+    <div class="chat-bubble slide-left">
+      <div class="chat-header">
+        <div class="avatar">😔</div>
+        <div class="name">ejaa :</div>
+      </div>
+      <div class="message">
+        <p>✨ <strong>Halo Kiyaa...</strong> ✨</p>
+        <p>Maafin aku yaa.. aku tau salah <strong>tapi maafin yaa kiyaa</strong> 😁</p>
+        <p>💬 kiyaa jangan ngambek dongg, tadikan cuma bercanda 👀</p>
+        <p>kiyaa jangan baperan, nanti kalo sering baperan kedepannya gimanaa hayoo?</p>
+        <p>Maafin aku yaa Kiyaa</p>
+        <div class="emoji-big">👉👈</div>
+      </div>
+    </div>
+
+    <!-- Tombol iya & tidak, slide from right -->
+    <div class="button-zone slide-right" id="buttonZone">
+      <button class="btn btn-maafin" id="maafinBtn">💖 Maafin 💖</button>
+      <button class="btn btn-tidak" id="tidakBtn">🚫 Tidak</button>
+    </div>
+    <div class="heart-decoration">
+      💗 💕 💞
+    </div>
+  </div>
+</div>
+
+<!-- POPUP CUSTOM "HOREE" setelah klik maafin -->
+<div id="popupSuccess" class="popup-overlay">
+  <div class="popup-card">
+    <div class="confetti">🎉🥳🎉</div>
+    <h2>HOREE! 🎈</h2>
+    <p>Kiya memaafkan kamu! 💖</p>
+    <p style="font-size: 0.9rem; margin-top: 12px;">Baik lagi yaa, jangan buat cemburu lagi 😘</p>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // --- ELEMEN DOM ---
+    const splash = document.getElementById('splashScreen');
+    const mainContainer = document.getElementById('mainContainer');
+    const maafinBtn = document.getElementById('maafinBtn');
+    const tidakBtn = document.getElementById('tidakBtn');
+    const popup = document.getElementById('popupSuccess');
+    
+    // --- variabel untuk tombol tidak menjauh (transform) ---
+    let isRedirecting = false;   // mencegah double redirect / spam popup
+    
+    // FUNGSI: sembunyikan splash setelah animasi dan tampilkan main dengan animasi slide
+    function hideSplashAndShowMain() {
+      // langsung sembunyikan splash tanpa efek fade (instant)
+      splash.style.display = 'none';
+      // tampilkan main container (awalnya display none)
+      mainContainer.style.display = 'block';
+      
+      // Biar animasi slide dari kanan dan kiri bekerja, tambahkan class 'animate-in'
+      // tapi butuh reflow agar transisi bisa jalan, kita paksa setelah ditampilkan
+      setTimeout(() => {
+        mainContainer.classList.add('animate-in');
+      }, 20); // micro delay biar DOM siap
+    }
+    
+    // waktu splash muncul selama 1.8 detik (cukup liat animasi)
+    setTimeout(() => {
+      // pastikan splash masih ada (belum dihapus)
+      if (splash && splash.style.display !== 'none') {
+        hideSplashAndShowMain();
+      }
+    }, 1800);
+    
+    // --- TOMBOL "TIDAK" : Menjauh ketika diklik (transform random) ---
+    // fungsi random offset dengan batas aman (tidak keluar viewport tapi tetap lucu)
+    function moveAwayButton(btn) {
+      // agar tidak terlalu jauh keluar dari area tombol container, ambil batasan berdasarkan parent container
+      const parentZone = document.getElementById('buttonZone');
+      if (!parentZone) return;
+      
+      const btnRect = btn.getBoundingClientRect();
+      const parentRect = parentZone.getBoundingClientRect();
+      const viewportWidth = window.innerWidth;
+      const viewportHeight = window.innerHeight;
+      
+      // batas perpindahan relatif terhadap posisi semula, tapi tetap dalam jangkauan layar (tidak keluar dari kiri/kanan terlalu jauh)
+      let maxOffsetX = 110;   // pixel
+      let maxOffsetY = 55;
+      
+      // jika layar kecil, kurangi offset
+      if (viewportWidth < 500) {
+        maxOffsetX = 70;
+        maxOffsetY = 45;
+      }
+      
+      // generate offset random antara -maxOffsetX s/d +maxOffsetX, dan Y -maxOffsetY/2 .. +maxOffsetY
+      const randomX = (Math.random() - 0.5) * maxOffsetX * 2;
+      const randomY = (Math.random() - 0.5) * maxOffsetY * 1.6;
+      
+      // Pastikan tombol tidak kabur terlalu parah ke luar dari parentZone secara visual, batasi supaya tetap bisa diklik
+      // Kita set style transform dengan transition yang smooth
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+      
+      // tambahkan event listener sekali untuk kembali? tidak perlu, setiap klik dia akan bergerak lagi
+      // JANGAN lupa agar setelah beberapa waktu dia tidak menggantung, tombol tetap bisa diklik.
+      // Optional: jika tombol terlalu ujung batasan, besok gerak lagi. kita biarkan.
+      // Agar tombol tidak "kumpul" di pojok, setiap klik akan random ulang.
+    }
+    
+    // event listener tombol tidak -> menjauh
+    if (tidakBtn) {
+      tidakBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        // efek getar kecil (optional)
+        this.style.transform = `scale(0.96)`;
+        setTimeout(() => {
+          if (this) this.style.transform = ''; // reset scale sementara setelah gerak
+        }, 100);
+        // panggil fungsi menjauh (dengan transform mengubah posisi)
+        moveAwayButton(this);
+        // Beri efek suara? ga perlu, tapi biar responsif
+        // Selain itu, mengubah posisi tapi tetap bisa di klik lagi nanti
+      });
+    }
+    
+    // --- TOMBOL "MAAFIN" -> Popup Horee -> Redirect ke WhatsApp ---
+    function showHoreeAndRedirect() {
+      if (isRedirecting) return;  // sudah dalam proses redirect
+      isRedirecting = true;
+      
+      // Tampilkan popup modern
+      popup.classList.add('active');
+      
+      // Konfirmasi: setelah 2 detik redirect ke WhatsApp nomor 088299435445
+      setTimeout(() => {
+        // Nomor tujuan: 088299435445 -> format internasional: 6288299435445 (hilangkan 0 awal)
+        const phoneNumber = "6288299435445";
+        // Pesan otomatis biar romantis (optional)
+        const message = "Halo Kiyaa 💖, aku udah klik maafin! Makasih sudah memaafkan aku, gak akan bikin cemburu lagi deh. Kamu yang terbaik! 😘";
+        const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        
+        // Redirect ke WhatsApp
+        window.location.href = waLink;
+      }, 2000); // 2 detik menikmati popup horee
+    }
+    
+    if (maafinBtn) {
+      maafinBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (isRedirecting) return;
+        showHoreeAndRedirect();
+      });
+    }
+    
+    // Opsional: kalau user klik overlay popup, biarkan saja tidak mengganggu (tapi tidak perlu)
+    popup.addEventListener('click', function(e) {
+      // jika klik di luar card, jangan tutup popup biar aman karena nanti redirect
+      if (e.target === popup) {
+        // tidak melakukan apa-apa, agar tidak mengganggu redirect
+      }
+    });
+    
+    // tambahan: Reset transform tombol tidak saat orientasi layar berubah (biar posisi tidak aneh)
+    window.addEventListener('resize', function() {
+      if (tidakBtn && tidakBtn.style.transform) {
+        // jangan reset secara paksa jika tombol tidak sedang 'menjauh', namun biar lebih rapi setelah resize kita kembalikan?
+        // Karena bisa jadi tombol tidak terlihat terlalu aneh, kita reset ke posisi semula (optional) agar tidak error.
+        // Tapi biar lebih user friendly, reset transform setelah resize (agar tidak ke luar layar)
+        // Ini juga membuat tombol kembali ke tempat awal, memberikan pengalaman segar.
+        tidakBtn.style.transform = 'translate(0px, 0px)';
+      }
+    });
+    
+    // prevent splash stuck jika ada error (misal timeout ngga jalan)
+    if (splash && mainContainer) {
+      // fallback: jika setelah 3 detik splash masih ada (aneh), paksa hilangkan
+      setTimeout(() => {
+        if (splash && splash.style.display !== 'none') {
+          hideSplashAndShowMain();
+        }
+      }, 3000);
+    }
+    
+    // Tambahan: tombol tidak juga bisa digerakkan berulang kali, sempurna.
+    // style tambahan untuk tombol tidak yang bergerak
+    // dan pastikan pesan agar Kiya ga baperan sudah jelas di bubble chat.
+    
+    // Efek mikro: saat halaman dimuat, pastikan tidak ada error
+    console.log("💗 Halaman maaf buat Kiya siap 💗");
+  })();
+</script>
+</body>
+</html>
